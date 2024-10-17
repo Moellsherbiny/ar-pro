@@ -1,121 +1,143 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>شرح المصفوفات بالواقع المعزز - متجاوب</title>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.2.0/aframe.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ar.js/2.2.2/aframe-ar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-        }
-        #info-panel, #debug-panel {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-            z-index: 10;
-        }
-        #debug-panel {
-            top: 20px;
-            bottom: auto;
-        }
-        #rotate-device {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            display: none;
-        }
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      #info-panel {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        text-align: center;
+        display: none;
+        z-index: 9999;
+      }
     </style>
-    <script>
-        AFRAME.registerComponent('matrix-element', {
-            schema: {
-                value: {type: 'string'},
-                row: {type: 'number'},
-                col: {type: 'number'}
-            },
-            init: function () {
-                var el = this.el;
-                var data = this.data;
-                el.setAttribute('text', {
-                    value: data.value,
-                    width: 1,
-                    height: 1,
-                    color: 'white',
-                    align: 'center'
-                });
-                el.setAttribute('position', {x: data.col - 1, y: 1 - data.row, z: 0});
+  </head>
+  <body>
+    <a-scene
+      mindar-image="imageTargetSrc: https://your-target-compiler-output.mind;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <a-asset-item
+          id="matrixModel"
+          src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/image-tracking/assets/card-example/softmind/scene.gltf"
+        ></a-asset-item>
+      </a-assets>
 
-                el.addEventListener('click', function () {
-                    document.getElementById('info-panel').style.display = 'block';
-                    document.getElementById('info-panel').innerHTML = 'العنصر في الصف ' + data.row + ' والعمود ' + data.col + ' هو ' + data.value;
-                });
-            }
-        });
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-        function checkOrientation() {
-            var rotateDevice = document.getElementById('rotate-device');
-            if (window.orientation === 0 || window.orientation === 180) {
-                rotateDevice.style.display = 'flex';
-            } else {
-                rotateDevice.style.display = 'none';
-            }
-        }
-
-        window.addEventListener('load', checkOrientation);
-        window.addEventListener('orientationchange', checkOrientation);
-
-        // Debugging
-        AFRAME.registerComponent('marker-debug', {
-            init: function () {
-                this.el.addEventListener('markerFound', function () {
-                    document.getElementById('debug-panel').innerHTML = 'تم العثور على العلامة';
-                });
-                this.el.addEventListener('markerLost', function () {
-                    document.getElementById('debug-panel').innerHTML = 'تم فقدان العلامة';
-                });
-            }
-        });
-    </script>
-</head>
-<body>
-    <div id="rotate-device">
-        الرجاء تدوير جهازك للحصول على أفضل تجربة
-    </div>
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false">
-        <a-marker type='pattern' url='https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/data/patt.hiro' marker-debug>
-            <a-entity id="matrix-container" scale="0.5 0.5 0.5">
-                <a-plane width="3" height="3" rotation="-90 0 0" color="#4CAF50"></a-plane>
-                <a-entity matrix-element="value: 1; row: 1; col: 1"></a-entity>
-                <a-entity matrix-element="value: 2; row: 1; col: 2"></a-entity>
-                <a-entity matrix-element="value: 3; row: 1; col: 3"></a-entity>
-                <a-entity matrix-element="value: 4; row: 2; col: 1"></a-entity>
-                <a-entity matrix-element="value: 5; row: 2; col: 2"></a-entity>
-                <a-entity matrix-element="value: 6; row: 2; col: 3"></a-entity>
-                <a-entity matrix-element="value: 7; row: 3; col: 1"></a-entity>
-                <a-entity matrix-element="value: 8; row: 3; col: 2"></a-entity>
-                <a-entity matrix-element="value: 9; row: 3; col: 3"></a-entity>
-            </a-entity>
-            <a-text value="مصفوفة 3x3" position="0 2 0" rotation="-90 0 0" color="white" align="center" scale="1 1 1"></a-text>
-        </a-marker>
-        <a-entity camera></a-entity>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-plane
+          width="1"
+          height="1"
+          rotation="0 0 0"
+          material="color: #4CAF50"
+          opacity="0.5"
+        ></a-plane>
+        <a-entity id="matrix-container" position="0 0 0.1" scale="0.3 0.3 0.3">
+          <a-text
+            value="1"
+            position="-0.3 0.3 0"
+            color="white"
+            scale="0.5 0.5 0.5"
+          ></a-text>
+          <a-text
+            value="2"
+            position="0 0.3 0"
+            color="white"
+            scale="0.5 0.5 0.5"
+          ></a-text>
+          <a-text
+            value="3"
+            position="0.3 0.3 0"
+            color="white"
+            scale="0.5 0.5 0.5"
+          ></a-text>
+          <a-text
+            value="4"
+            position="-0.3 0 0"
+            color="white"
+            scale="0.5 0.5 0.5"
+          ></a-text>
+          <a-text
+            value="5"
+            position="0 0 0"
+            color="white"
+            scale="0.5 0.5 0.5"
+          ></a-text>
+          <a-text
+            value="6"
+            position="0.3 0 0"
+            color="white"
+            scale="0.5 0.5 0.5"
+          ></a-text>
+          <a-text
+            value="7"
+            position="-0.3 -0.3 0"
+            color="white"
+            scale="0.5 0.5 0.5"
+          ></a-text>
+          <a-text
+            value="8"
+            position="0 -0.3 0"
+            color="white"
+            scale="0.5 0.5 0.5"
+          ></a-text>
+          <a-text
+            value="9"
+            position="0.3 -0.3 0"
+            color="white"
+            scale="0.5 0.5 0.5"
+          ></a-text>
+        </a-entity>
+        <a-text
+          value="مصفوفة 3x3"
+          position="0 0.6 0"
+          rotation="0 0 0"
+          color="white"
+          align="center"
+          scale="0.5 0.5 0.5"
+        ></a-text>
+      </a-entity>
     </a-scene>
     <div id="info-panel"></div>
-    <div id="debug-panel"></div>
-</body>
+
+    <script>
+      const matrixElements = document.querySelectorAll(
+        "#matrix-container a-text"
+      );
+      const infoPanel = document.getElementById("info-panel");
+
+      matrixElements.forEach((element, index) => {
+        const row = Math.floor(index / 3) + 1;
+        const col = (index % 3) + 1;
+        element.addEventListener("click", () => {
+          infoPanel.style.display = "block";
+          infoPanel.innerHTML = `العنصر في الصف ${row} والعمود ${col} هو ${element.getAttribute(
+            "value"
+          )}`;
+          setTimeout(() => {
+            infoPanel.style.display = "none";
+          }, 3000);
+        });
+      });
+    </script>
+  </body>
 </html>
