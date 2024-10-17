@@ -1,168 +1,70 @@
 <!DOCTYPE html>
 <html lang="ar">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AR.js Matrix Grid</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
-    <style>
-      body,
-      html {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-      }
-      #ar-container {
-        width: 100%;
-        height: 100%;
-        position: relative;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="ar-container"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR.js Matrix Grid</title>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+    #ar-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
 
-    <a-scene embedded arjs>
-      <!-- نحدد الماركر الخاص بالواقع المعزز -->
-      <a-marker preset="hiro">
-        <!-- إنشاء شبكة من العناصر التي تمثل المصفوفة -->
-        <a-entity position="0 0 0">
-          <!-- نضع كل مربع (tile) في موقع مختلف بناءً على المصفوفة -->
-          <a-box
-            position="-1 1 0"
-            width="0.5"
-            height="0.5"
-            depth="0.1"
-            color="#4CC3D9"
-          >
-            <a-text
-              value="1"
-              color="#FFFFFF"
-              position="0 0.3 0.1"
-              align="center"
-            ></a-text>
-          </a-box>
-          <a-box
-            position="0 1 0"
-            width="0.5"
-            height="0.5"
-            depth="0.1"
-            color="#4CC3D9"
-          >
-            <a-text
-              value="2"
-              color="#FFFFFF"
-              position="0 0.3 0.1"
-              align="center"
-            ></a-text>
-          </a-box>
-          <a-box
-            position="1 1 0"
-            width="0.5"
-            height="0.5"
-            depth="0.1"
-            color="#4CC3D9"
-          >
-            <a-text
-              value="3"
-              color="#FFFFFF"
-              position="0 0.3 0.1"
-              align="center"
-            ></a-text>
-          </a-box>
+  <div id="ar-container"></div>
 
-          <a-box
-            position="-1 0 0"
-            width="0.5"
-            height="0.5"
-            depth="0.1"
-            color="#4CC3D9"
-          >
-            <a-text
-              value="4"
-              color="#FFFFFF"
-              position="0 0.3 0.1"
-              align="center"
-            ></a-text>
-          </a-box>
-          <a-box
-            position="0 0 0"
-            width="0.5"
-            height="0.5"
-            depth="0.1"
-            color="#4CC3D9"
-          >
-            <a-text
-              value="5"
-              color="#FFFFFF"
-              position="0 0.3 0.1"
-              align="center"
-            ></a-text>
-          </a-box>
-          <a-box
-            position="1 0 0"
-            width="0.5"
-            height="0.5"
-            depth="0.1"
-            color="#4CC3D9"
-          >
-            <a-text
-              value="6"
-              color="#FFFFFF"
-              position="0 0.3 0.1"
-              align="center"
-            ></a-text>
-          </a-box>
+  <a-scene embedded arjs>
+    <!-- نحدد الماركر الخاص بالواقع المعزز -->
+    <a-marker preset="hiro" detectionMode="mono" maxDetectionRate="60" smooth="true">
+      <!-- إنشاء شبكة من العناصر التي تمثل المصفوفة -->
+      <a-entity position="0 0 0">
+        <!-- نضع كل مربع (tile) في موقع مختلف بناءً على المصفوفة -->
+        <a-box position="-1 1 0" width="0.5" height="0.5" depth="0.1" color="#4CC3D9">
+          <a-text value="1" color="#FFFFFF" position="0 0.3 0.1" align="center"></a-text>
+        </a-box>
+        <a-box position="0 1 0" width="0.5" height="0.5" depth="0.1" color="#4CC3D9">
+          <a-text value="2" color="#FFFFFF" position="0 0.3 0.1" align="center"></a-text>
+        </a-box>
+        <a-box position="1 1 0" width="0.5" height="0.5" depth="0.1" color="#4CC3D9">
+          <a-text value="3" color="#FFFFFF" position="0 0.3 0.1" align="center"></a-text>
+        </a-box>
 
-          <a-box
-            position="-1 -1 0"
-            width="0.5"
-            height="0.5"
-            depth="0.1"
-            color="#4CC3D9"
-          >
-            <a-text
-              value="7"
-              color="#FFFFFF"
-              position="0 0.3 0.1"
-              align="center"
-            ></a-text>
-          </a-box>
-          <a-box
-            position="0 -1 0"
-            width="0.5"
-            height="0.5"
-            depth="0.1"
-            color="#4CC3D9"
-          >
-            <a-text
-              value="8"
-              color="#FFFFFF"
-              position="0 0.3 0.1"
-              align="center"
-            ></a-text>
-          </a-box>
-          <a-box
-            position="1 -1 0"
-            width="0.5"
-            height="0.5"
-            depth="0.1"
-            color="#4CC3D9"
-          >
-            <a-text
-              value="9"
-              color="#FFFFFF"
-              position="0 0.3 0.1"
-              align="center"
-            ></a-text>
-          </a-box>
-        </a-entity>
-      </a-marker>
+        <a-box position="-1 0 0" width="0.5" height="0.5" depth="0.1" color="#4CC3D9">
+          <a-text value="4" color="#FFFFFF" position="0 0.3 0.1" align="center"></a-text>
+        </a-box>
+        <a-box position="0 0 0" width="0.5" height="0.5" depth="0.1" color="#4CC3D9">
+          <a-text value="5" color="#FFFFFF" position="0 0.3 0.1" align="center"></a-text>
+        </a-box>
+        <a-box position="1 0 0" width="0.5" height="0.5" depth="0.1" color="#4CC3D9">
+          <a-text value="6" color="#FFFFFF" position="0 0.3 0.1" align="center"></a-text>
+        </a-box>
 
-      <a-entity camera></a-entity>
-    </a-scene>
-  </body>
+        <a-box position="-1 -1 0" width="0.5" height="0.5" depth="0.1" color="#4CC3D9">
+          <a-text value="7" color="#FFFFFF" position="0 0.3 0.1" align="center"></a-text>
+        </a-box>
+        <a-box position="0 -1 0" width="0.5" height="0.5" depth="0.1" color="#4CC3D9">
+          <a-text value="8" color="#FFFFFF" position="0 0.3 0.1" align="center"></a-text>
+        </a-box>
+        <a-box position="1 -1 0" width="0.5" height="0.5" depth="0.1" color="#4CC3D9">
+          <a-text value="9" color="#FFFFFF" position="0 0.3 0.1" align="center"></a-text>
+        </a-box>
+      </a-entity>
+    </a-marker>
+
+    <a-entity camera look-controls="enabled: false; zoom: 0.5"></a-entity>
+  </a-scene>
+
+</body>
 </html>
