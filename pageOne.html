@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شرح المصفوفات بالواقع المعزز</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.2.0/aframe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ar.js/2.2.2/aframe-ar.min.js"></script>
+    <script>
+        AFRAME.registerComponent('matrix-element', {
+            schema: {
+                value: {type: 'string'},
+                row: {type: 'number'},
+                col: {type: 'number'}
+            },
+            init: function () {
+                var el = this.el;
+                var data = this.data;
+                el.setAttribute('text', {
+                    value: data.value,
+                    width: 1,
+                    height: 1,
+                    color: 'white',
+                    align: 'center'
+                });
+                el.setAttribute('position', {x: data.col - 1, y: 1 - data.row, z: 0});
+            }
+        });
+    </script>
+</head>
+<body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+        <a-marker preset="hiro">
+            <a-entity id="matrix-container">
+                <a-plane width="3" height="3" rotation="-90 0 0" color="#4CAF50"></a-plane>
+                <a-entity matrix-element="value: 1; row: 1; col: 1"></a-entity>
+                <a-entity matrix-element="value: 2; row: 1; col: 2"></a-entity>
+                <a-entity matrix-element="value: 3; row: 1; col: 3"></a-entity>
+                <a-entity matrix-element="value: 4; row: 2; col: 1"></a-entity>
+                <a-entity matrix-element="value: 5; row: 2; col: 2"></a-entity>
+                <a-entity matrix-element="value: 6; row: 2; col: 3"></a-entity>
+                <a-entity matrix-element="value: 7; row: 3; col: 1"></a-entity>
+                <a-entity matrix-element="value: 8; row: 3; col: 2"></a-entity>
+                <a-entity matrix-element="value: 9; row: 3; col: 3"></a-entity>
+            </a-entity>
+            <a-text value="مصفوفة 3x3" position="0 2 0" rotation="-90 0 0" color="white" align="center" scale="2 2 2"></a-text>
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+</body>
+</html>
