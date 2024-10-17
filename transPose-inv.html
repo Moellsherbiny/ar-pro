@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>مصفوفة 2x4 - تباديل</title>
+    <title>مصفوفة 4x2</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <style>
       body {
@@ -34,43 +34,37 @@
 
       <a-entity id="matrix" position="0 1.6 -2">
         <!-- الصف الأول -->
-        <a-box position="-0.75 0.25 0" color="red" scale="0.2 0.2 0.2"></a-box>
-        <a-box
-          position="-0.25 0.25 0"
-          color="green"
-          scale="0.2 0.2 0.2"
-        ></a-box>
-        <a-box position="0.25 0.25 0" color="blue" scale="0.2 0.2 0.2"></a-box>
-        <a-box
-          position="0.75 0.25 0"
-          color="yellow"
-          scale="0.2 0.2 0.2"
-        ></a-box>
+        <a-box position="-0.25 0.25 0" color="red" scale="0.2 0.2 0.2"></a-box>
+        <a-box position="0.25 0.25 0" color="green" scale="0.2 0.2 0.2"></a-box>
         <!-- الصف الثاني -->
+        <a-box position="-0.25 0 0" color="blue" scale="0.2 0.2 0.2"></a-box>
+        <a-box position="0.25 0 0" color="yellow" scale="0.2 0.2 0.2"></a-box>
+        <!-- الصف الثالث -->
         <a-box
-          position="-0.75 -0.05 0"
+          position="-0.25 -0.25 0"
           color="brown"
           scale="0.2 0.2 0.2"
         ></a-box>
         <a-box
-          position="-0.25 -0.05 0"
+          position="0.25 -0.25 0"
           color="magenta"
           scale="0.2 0.2 0.2"
         ></a-box>
+        <!-- الصف الرابع -->
         <a-box
-          position="0.25 -0.05 0"
+          position="-0.25 -0.5 0"
           color="orange"
           scale="0.2 0.2 0.2"
         ></a-box>
         <a-box
-          position="0.75 -0.05 0"
+          position="0.25 -0.5 0"
           color="purple"
           scale="0.2 0.2 0.2"
         ></a-box>
 
         <a-text
-          value="مصفوفة 2x4"
-          position="0 0.5 0"
+          value="مصفوفة 4x2"
+          position="0 0.6 0"
           scale="0.5 0.5 0.5"
           color="white"
           align="center"
@@ -81,8 +75,7 @@
     </a-scene>
 
     <div id="info-panel">
-      هذه مصفوفة 2×4. تتكون من صفين وأربعة أعمدة. كل مكعب يمثل عنصرًا في
-      المصفوفة. للتحرك، استخدم الكاميرا لتحريك العرض.
+      هذه مصفوفة 4×2. تتكون من 4 صفوف وعمودين. كل مكعب يمثل عنصرًا في المصفوفة.
     </div>
   </body>
 </html>
