@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>تعريف المصفوفات</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      body {
+        font-family: "Cairo", sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .description {
+        text-align: right;
+        margin: 20px 0;
+        color: #555;
+      }
+      a {
+        display: block;
+        text-align: center;
+        margin: 20px 0;
+        color: #007bff;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>تعريف المصفوفات</h1>
+    <p class="description">
+      المصفوفة هي بنية بيانات تحتوي على مجموعة من العناصر المتشابهة، حيث يتم
+      تخزين هذه العناصر في مواقع متتابعة في الذاكرة. يُمكن الوصول إلى العناصر
+      عبر استخدام مؤشر يمثل موقع العنصر داخل المصفوفة.
+    </p>
+    <p class="description">
+      على سبيل المثال، إذا كانت لدينا مصفوفة تحتوي على الأرقام 1، 2، 3، 4، 5،
+      يمكن الوصول إلى الرقم الثاني باستخدام المؤشر 1 (حيث يبدأ العد من 0).
+    </p>
+
+    <a-scene
+      mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-assets>
+        <!-- تحميل صورة الماركر -->
+        <img
+          id="card"
+          src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.png"
+        />
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- تحديد الهدف للماركر -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <!-- مصفوفة من المكعبات تمثل العناصر -->
+        <a-entity position="0 0 0.1" rotation="0 0 0">
+          <a-box
+            position="-0.5 0.5 0"
+            width="0.4"
+            height="0.4"
+            depth="0.4"
+            color="#4CC3D9"
+          ></a-box>
+          <a-box
+            position="0 0.5 0"
+            width="0.4"
+            height="0.4"
+            depth="0.4"
+            color="#FF6347"
+          ></a-box>
+          <a-box
+            position="0.5 0.5 0"
+            width="0.4"
+            height="0.4"
+            depth="0.4"
+            color="#FFD700"
+          ></a-box>
+
+          <a-box
+            position="-0.5 0 0"
+            width="0.4"
+            height="0.4"
+            depth="0.4"
+            color="#ADFF2F"
+          ></a-box>
+          <a-box
+            position="0 0 0"
+            width="0.4"
+            height="0.4"
+            depth="0.4"
+            color="#FF69B4"
+          ></a-box>
+          <a-box
+            position="0.5 0 0"
+            width="0.4"
+            height="0.4"
+            depth="0.4"
+            color="#8A2BE2"
+          ></a-box>
+
+          <a-box
+            position="-0.5 -0.5 0"
+            width="0.4"
+            height="0.4"
+            depth="0.4"
+            color="#20B2AA"
+          ></a-box>
+          <a-box
+            position="0 -0.5 0"
+            width="0.4"
+            height="0.4"
+            depth="0.4"
+            color="#DC143C"
+          ></a-box>
+          <a-box
+            position="0.5 -0.5 0"
+            width="0.4"
+            height="0.4"
+            depth="0.4"
+            color="#FF4500"
+          ></a-box>
+        </a-entity>
+      </a-entity>
+    </a-scene>
+
+    <a href="index.html">العودة إلى الصفحة الرئيسية</a>
+  </body>
+</html>
