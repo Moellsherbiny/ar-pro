@@ -3,24 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>تعريف المصفوفات</title>
+    <title>المصفوفات</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     <style>
       body {
         font-family: "Cairo", sans-serif;
         margin: 0;
-        padding: 20px;
+        padding: 0;
         background-color: #f4f4f4;
+      }
+      .header {
+        background-color: white;
+        padding: 15px;
+        position: fixed;
+        width: 100%;
+        z-index: 10;
       }
       h1 {
         text-align: center;
         color: #333;
+        margin: 0;
       }
       .description {
         text-align: right;
         margin: 20px 0;
         color: #555;
+        margin-top: 60px; /* لتجنب تداخل النص مع خلفية الصفحة */
       }
       a {
         display: block;
@@ -35,16 +44,20 @@
     </style>
   </head>
   <body>
-    <h1>تعريف المصفوفات</h1>
-    <p class="description">
-      المصفوفة هي بنية بيانات تحتوي على مجموعة من العناصر المتشابهة، حيث يتم
-      تخزين هذه العناصر في مواقع متتابعة في الذاكرة. يُمكن الوصول إلى العناصر
-      عبر استخدام مؤشر يمثل موقع العنصر داخل المصفوفة.
-    </p>
-    <p class="description">
-      على سبيل المثال، إذا كانت لدينا مصفوفة تحتوي على الأرقام 1، 2، 3، 4، 5،
-      يمكن الوصول إلى الرقم الثاني باستخدام المؤشر 1 (حيث يبدأ العد من 0).
-    </p>
+    <div class="header">
+      <h1>تعريف المصفوفات</h1>
+    </div>
+
+    <div class="description">
+      <p>
+        المصفوفات هي نمط يحتوي على مجموعة من الأشكال أو الأشياء غير المرتبة في
+        صفوف وأعمدة لا يتخللها فراغات.
+      </p>
+      <p>
+        هذا الشكل لا يمثل مصفوفة: بسبب وجود فراغات بين العناصر.
+        <br />بينما هذا الشكل يمثل مصفوفة: لأنه مرتب في شكل صفوف وأعمدة.
+      </p>
+    </div>
 
     <a-scene
       mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind;"
@@ -136,6 +149,8 @@
       </a-entity>
     </a-scene>
 
-    <a href="index.html">العودة إلى الصفحة الرئيسية</a>
+    <a href="multiplication-zero-one.html"
+      >الانتقال إلى صفحة الضرب في صفر وواحد</a
+    >
   </body>
 </html>

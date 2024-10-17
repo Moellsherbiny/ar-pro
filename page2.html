@@ -10,17 +10,26 @@
       body {
         font-family: "Cairo", sans-serif;
         margin: 0;
-        padding: 20px;
+        padding: 0;
         background-color: #f4f4f4;
+      }
+      .header {
+        background-color: white;
+        padding: 15px;
+        position: fixed;
+        width: 100%;
+        z-index: 10;
       }
       h1 {
         text-align: center;
         color: #333;
+        margin: 0;
       }
       .description {
         text-align: right;
         margin: 20px 0;
         color: #555;
+        margin-top: 60px; /* لتجنب تداخل النص مع خلفية الصفحة */
       }
       a {
         display: block;
@@ -35,19 +44,24 @@
     </style>
   </head>
   <body>
-    <h1>الضرب في صفر وواحد</h1>
-    <p class="description">
-      الضرب في صفر: عندما نضرب أي عدد في صفر، فإن الناتج يكون دائمًا صفر. على
-      سبيل المثال، إذا كان لدينا 3 مجموعات وكل مجموعة تحتوي على صفر من العناصر،
-      سيكون العدد الإجمالي للصفر:
-      <br />عدد العناصر = 3 * 0 = 0
-    </p>
-    <p class="description">
-      الضرب في واحد: عندما نضرب أي عدد في واحد، فإن الناتج يكون دائمًا العدد
-      نفسه. على سبيل المثال، إذا كان لدينا 8 مجموعات وكل مجموعة تحتوي على عنصر
-      واحد، سيكون العدد الإجمالي:
-      <br />عدد العناصر = 8 * 1 = 8
-    </p>
+    <div class="header">
+      <h1>الضرب في صفر وواحد</h1>
+    </div>
+
+    <div class="description">
+      <p>
+        الضرب في صفر: عندما نضرب أي عدد في صفر، فإن الناتج يكون دائمًا صفر. على
+        سبيل المثال، إذا كان لدينا 3 مجموعات وكل مجموعة تحتوي على صفر من
+        العناصر، سيكون العدد الإجمالي للصفر:
+        <br />عدد العناصر = 3 * 0 = 0
+      </p>
+      <p>
+        الضرب في واحد: عندما نضرب أي عدد في واحد، فإن الناتج يكون دائمًا العدد
+        نفسه. على سبيل المثال، إذا كان لدينا 8 مجموعات وكل مجموعة تحتوي على عنصر
+        واحد، سيكون العدد الإجمالي:
+        <br />عدد العناصر = 8 * 1 = 8
+      </p>
+    </div>
 
     <a-scene
       mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind;"
