@@ -25,11 +25,15 @@
         color: #333;
         margin: 0;
       }
-      .description {
-        text-align: right;
+      .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: center;
+        font-size: 8;
         margin: 20px 0;
-        color: #555;
-        margin-top: 60px; /* لتجنب تداخل النص مع خلفية الصفحة */
+        color: #333;
+        background-color: white;
       }
       a {
         display: block;
@@ -44,11 +48,8 @@
     </style>
   </head>
   <body>
-    <div class="header">
+    <div class="content">
       <h1>الضرب في صفر وواحد</h1>
-    </div>
-
-    <div class="description">
       <p>
         الضرب في صفر: عندما نضرب أي عدد في صفر، فإن الناتج يكون دائمًا صفر. على
         سبيل المثال، إذا كان لدينا 3 مجموعات وكل مجموعة تحتوي على صفر من
@@ -93,7 +94,7 @@
           ></a-box>
           <a-text
             value="3 * 0 = 0"
-            position="-0.5 0.7 0"
+            position="-3 0.7 0"
             align="center"
             color="#FFF"
           ></a-text>
