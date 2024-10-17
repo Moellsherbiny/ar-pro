@@ -2,10 +2,46 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>شرح المصفوفات بالواقع المعزز</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>شرح المصفوفات بالواقع المعزز - متجاوب</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.2.0/aframe.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ar.js/2.2.2/aframe-ar.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+      }
+      #info-panel {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        z-index: 10;
+        display: none;
+      }
+      #rotate-device {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        display: none;
+      }
+    </style>
     <script>
       AFRAME.registerComponent("matrix-element", {
         schema: {
@@ -28,14 +64,42 @@
             y: 1 - data.row,
             z: 0,
           });
+
+          el.addEventListener("click", function () {
+            document.getElementById("info-panel").style.display = "block";
+            document.getElementById("info-panel").innerHTML =
+              "العنصر في الصف " +
+              data.row +
+              " والعمود " +
+              data.col +
+              " هو " +
+              data.value;
+          });
         },
       });
+
+      function checkOrientation() {
+        var rotateDevice = document.getElementById("rotate-device");
+        if (window.orientation === 0 || window.orientation === 180) {
+          rotateDevice.style.display = "flex";
+        } else {
+          rotateDevice.style.display = "none";
+        }
+      }
+
+      window.addEventListener("load", checkOrientation);
+      window.addEventListener("orientationchange", checkOrientation);
     </script>
   </head>
-  <body style="margin: 0; overflow: hidden">
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+  <body>
+    <div id="rotate-device">الرجاء تدوير جهازك للحصول على أفضل تجربة</div>
+    <a-scene
+      embedded
+      arjs="sourceType: webcam; debugUIEnabled: false;"
+      vr-mode-ui="enabled: false"
+    >
       <a-marker preset="hiro">
-        <a-entity id="matrix-container">
+        <a-entity id="matrix-container" scale="0.5 0.5 0.5">
           <a-plane
             width="3"
             height="3"
@@ -58,10 +122,11 @@
           rotation="-90 0 0"
           color="white"
           align="center"
-          scale="2 2 2"
+          scale="1 1 1"
         ></a-text>
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
+    <div id="info-panel"></div>
   </body>
 </html>
