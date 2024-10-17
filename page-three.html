@@ -1,17 +1,98 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="ar">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/dist/mindar-image.prod.js"></script>
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Augmented Reality Matrix</title>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.137.5/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/MindAR-js/AR@1.0.2/three.js"></script>
+    <style>
+      body,
+      html {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-plane color="blue" opaciy="0.5" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-      </a-entity>
-    </a-scene>
+    <div id="ar-container"></div>
+
+    <script type="module">
+      import {
+        loadMindAR,
+        startMindAR,
+      } from "https://cdn.jsdelivr.net/gh/MindAR-js/AR@1.0.2/three.js";
+
+      // إعداد الكاميرا والبيئة
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        70,
+        window.innerWidth / window.innerHeight,
+        0.01,
+        1000
+      );
+      camera.position.z = 5;
+
+      const renderer = new THREE.WebGLRenderer({ alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // تحميل MindAR
+      const mindAR = await loadMindAR({
+        container: document.getElementById("ar-container"),
+        imageTargetSrc: "./targets.mind",
+        filterMinCF: 0.1,
+        filterBeta: 1.5,
+      });
+
+      startMindAR(mindAR);
+
+      // مصفوفة لتوضيح العناصر
+      const matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ];
+
+      // دالة لإنشاء كرة لكل عنصر في المصفوفة
+      function createBall(x, y, value) {
+        const geometry = new THREE.SphereGeometry(0.1, 32, 32);
+        const material = new THREE.MeshBasicMaterial({ color: 0x0077ff });
+        const sphere = new THREE.Mesh(geometry, material);
+
+        // وضع الكرة في الموقع المناسب
+        sphere.position.set(x, y, 0);
+
+        // إضافة نص يمثل قيمة العنصر
+        const loader = new THREE.FontLoader();
+        loader.load("path-to-your-font.json", function (font) {
+          const textGeometry = new THREE.TextGeometry(value.toString(), {
+            font: font,
+            size: 0.05,
+            height: 0.01,
+          });
+          const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+          const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+          textMesh.position.set(x - 0.05, y - 0.05, 0.1);
+          scene.add(textMesh);
+        });
+
+        scene.add(sphere);
+      }
+
+      // عرض المصفوفة ككرات
+      for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+          createBall(i - 1, j - 1, matrix[i][j]);
+        }
+      }
+
+      // تحديث العرض
+      function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      }
+      animate();
+    </script>
   </body>
 </html>
