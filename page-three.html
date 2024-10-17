@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Augmented Reality Matrix</title>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.137.5/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/MindAR-js/AR@1.0.2/three.js"></script>
+    <title>AR.js Matrix Grid</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
     <style>
       body,
       html {
@@ -25,91 +25,144 @@
   <body>
     <div id="ar-container"></div>
 
-    <script type="module">
-      import {
-        loadMindAR,
-        startMindAR,
-      } from "https://cdn.jsdelivr.net/gh/MindAR-js/AR@1.0.2/three.js";
+    <a-scene embedded arjs>
+      <!-- نحدد الماركر الخاص بالواقع المعزز -->
+      <a-marker preset="hiro">
+        <!-- إنشاء شبكة من العناصر التي تمثل المصفوفة -->
+        <a-entity position="0 0 0">
+          <!-- نضع كل مربع (tile) في موقع مختلف بناءً على المصفوفة -->
+          <a-box
+            position="-1 1 0"
+            width="0.5"
+            height="0.5"
+            depth="0.1"
+            color="#4CC3D9"
+          >
+            <a-text
+              value="1"
+              color="#FFFFFF"
+              position="0 0.3 0.1"
+              align="center"
+            ></a-text>
+          </a-box>
+          <a-box
+            position="0 1 0"
+            width="0.5"
+            height="0.5"
+            depth="0.1"
+            color="#4CC3D9"
+          >
+            <a-text
+              value="2"
+              color="#FFFFFF"
+              position="0 0.3 0.1"
+              align="center"
+            ></a-text>
+          </a-box>
+          <a-box
+            position="1 1 0"
+            width="0.5"
+            height="0.5"
+            depth="0.1"
+            color="#4CC3D9"
+          >
+            <a-text
+              value="3"
+              color="#FFFFFF"
+              position="0 0.3 0.1"
+              align="center"
+            ></a-text>
+          </a-box>
 
-      // إعداد الكاميرا والبيئة
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(
-        70,
-        window.innerWidth / window.innerHeight,
-        0.01,
-        1000
-      );
-      camera.position.z = 3;
+          <a-box
+            position="-1 0 0"
+            width="0.5"
+            height="0.5"
+            depth="0.1"
+            color="#4CC3D9"
+          >
+            <a-text
+              value="4"
+              color="#FFFFFF"
+              position="0 0.3 0.1"
+              align="center"
+            ></a-text>
+          </a-box>
+          <a-box
+            position="0 0 0"
+            width="0.5"
+            height="0.5"
+            depth="0.1"
+            color="#4CC3D9"
+          >
+            <a-text
+              value="5"
+              color="#FFFFFF"
+              position="0 0.3 0.1"
+              align="center"
+            ></a-text>
+          </a-box>
+          <a-box
+            position="1 0 0"
+            width="0.5"
+            height="0.5"
+            depth="0.1"
+            color="#4CC3D9"
+          >
+            <a-text
+              value="6"
+              color="#FFFFFF"
+              position="0 0.3 0.1"
+              align="center"
+            ></a-text>
+          </a-box>
 
-      const renderer = new THREE.WebGLRenderer({ alpha: true });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.getElementById("ar-container").appendChild(renderer.domElement);
+          <a-box
+            position="-1 -1 0"
+            width="0.5"
+            height="0.5"
+            depth="0.1"
+            color="#4CC3D9"
+          >
+            <a-text
+              value="7"
+              color="#FFFFFF"
+              position="0 0.3 0.1"
+              align="center"
+            ></a-text>
+          </a-box>
+          <a-box
+            position="0 -1 0"
+            width="0.5"
+            height="0.5"
+            depth="0.1"
+            color="#4CC3D9"
+          >
+            <a-text
+              value="8"
+              color="#FFFFFF"
+              position="0 0.3 0.1"
+              align="center"
+            ></a-text>
+          </a-box>
+          <a-box
+            position="1 -1 0"
+            width="0.5"
+            height="0.5"
+            depth="0.1"
+            color="#4CC3D9"
+          >
+            <a-text
+              value="9"
+              color="#FFFFFF"
+              position="0 0.3 0.1"
+              align="center"
+            ></a-text>
+          </a-box>
+        </a-entity>
+      </a-marker>
 
-      // التأكد من أن الكاميرا تتغير مع حجم الشاشة
-      window.addEventListener("resize", () => {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
-        renderer.setSize(width, height);
-      });
-
-      // تحميل MindAR
-      const mindAR = await loadMindAR({
-        container: document.getElementById("ar-container"),
-        imageTargetSrc: "targets.mind", // تأكد من أن لديك الهدف الصحيح
-        filterMinCF: 0.1,
-        filterBeta: 1.5,
-      });
-
-      startMindAR(mindAR);
-
-      // مصفوفة لتوضيح العناصر
-      const matrix = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9],
-      ];
-
-      // دالة لإنشاء كرة لكل عنصر في المصفوفة
-      function createBall(x, y, value) {
-        const geometry = new THREE.SphereGeometry(0.1, 32, 32);
-        const material = new THREE.MeshBasicMaterial({ color: 0x0077ff });
-        const sphere = new THREE.Mesh(geometry, material);
-
-        // وضع الكرة في الموقع المناسب
-        sphere.position.set(x, y, 0);
-
-        // إضافة نص يمثل قيمة العنصر
-        const loader = new THREE.FontLoader();
-        loader.load("path-to-your-font.json", function (font) {
-          const textGeometry = new THREE.TextGeometry(value.toString(), {
-            font: font,
-            size: 0.05,
-            height: 0.01,
-          });
-          const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-          const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-          textMesh.position.set(x - 0.05, y - 0.05, 0.1);
-          scene.add(textMesh);
-        });
-
-        scene.add(sphere);
-      }
-
-      // عرض المصفوفة ككرات
-      for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix[i].length; j++) {
-          createBall(i - 1, j - 1, matrix[i][j]);
-        }
-      }
-
-      // تحديث العرض
-      function animate() {
-        requestAnimationFrame(animate);
-        renderer.render(scene, camera);
-      }
-      animate();
-    </script>
+      <a-entity camera></a-entity>
+    </a-scene>
   </body>
 </html>
